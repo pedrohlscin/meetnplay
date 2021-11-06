@@ -1,13 +1,30 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    Users aqui
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${user}">
+            <td th:text="${user.userName}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/addUser}" th:object="${user}" method="post">
+        <label>User name:</label>
+<!--        <input type="text" th:field="*{user.userName}" />-->
+        <button type="submit">Enter room</button>
+    </form>
+</div>
 </body>
 </html>
