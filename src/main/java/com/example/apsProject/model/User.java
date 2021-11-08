@@ -1,34 +1,36 @@
 package com.example.apsProject.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Observable;
 import java.util.Random;
 
-@Entity
-public class User {
+@Entity(name="NORMAL_USER")
+@IdClass(UserPk.class)
+public class User extends Observable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    private String userName;
+    private String name;
+    @Id
     private int code;
 
+    @Transient
     Random random = new Random();
 
-    public User(String userName) {
-        this.userName = userName;
+    public User() {}
+
+    public User(String name) {
+        this.name = name;
         this.code = random.nextInt(100);
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
+        setChanged();
+        notifyObservers();
     }
 
     public int getCode() {

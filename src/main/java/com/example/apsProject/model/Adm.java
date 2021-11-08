@@ -2,21 +2,17 @@ package com.example.apsProject.model;
 
 public class Adm {
 
-    private String admName;
+    private String name;
     private String code;
 
-    public Adm(String admName) {
-        this.admName = admName;
+    public Adm(String name) {
+        this.name = name;
         this.code = "ADM";
     }
 
-    public String getAdmName() {
-        return admName;
-    }
+    public String getName() { return name; }
 
-    public void setAdmName(String admName) {
-        this.admName = admName;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getCode() {
         return code;

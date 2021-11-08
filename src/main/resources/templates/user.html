@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Meet'N'Play</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
@@ -12,19 +12,27 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Code</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user: ${user}">
-            <td th:text="${user.userName}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.code}"></td>
         </tr>
         </tbody>
     </table>
-    <form th:action="@{/addUser}" th:object="${user}" method="post">
+    <br>
+    <label>Number of Users in this room:</label>
+    <span th:text="${count}"></span>
+    <br>
+    <form action="/user/addUser" method="post">
         <label>User name:</label>
-<!--        <input type="text" th:field="*{user.userName}" />-->
-        <button type="submit">Enter room</button>
+        <input type="text" name="name">
+        <button type="submit">Enter Room</button>
     </form>
+    <label>Room Code:</label>
+    <span th:text="${roomCode}"></span>
 </div>
 </body>
 </html>
