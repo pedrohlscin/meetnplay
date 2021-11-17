@@ -1,26 +1,28 @@
 package com.example.apsProject.model;
 
 import javax.persistence.*;
-import java.util.Observable;
 import java.util.Random;
 
-@Entity(name="NORMAL_USER")
+@Entity(name = "NORMAL_USER")
 @IdClass(UserPk.class)
-public class User extends Observable {
+public class User {
 
     @Id
     private String name;
     @Id
     private int code;
+    private int room;
 
     @Transient
     Random random = new Random();
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String name) {
+    public User(String name, int room) {
         this.name = name;
         this.code = random.nextInt(100);
+        this.room = room;
     }
 
     public String getName() {
@@ -29,8 +31,6 @@ public class User extends Observable {
 
     public void setName(String name) {
         this.name = name;
-        setChanged();
-        notifyObservers();
     }
 
     public int getCode() {
@@ -39,5 +39,13 @@ public class User extends Observable {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public int getRoom() {
+        return room;
+    }
+
+    public void setRoom(int room) {
+        this.room = room;
     }
 }

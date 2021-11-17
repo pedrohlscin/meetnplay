@@ -7,7 +7,13 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
+
 <div>
+    <form action="/user/addRoomOne" method="post">
+        <label>User name:</label>
+        <input type="text" name="name">
+        <button type="submit">Enter Room</button>
+    </form>
     <table border="1">
         <thead>
         <tr>
@@ -17,22 +23,217 @@
         </thead>
         <tbody>
         <tr th:each="user: ${user}">
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.code}"></td>
+            <div th:if="${user.room == 1}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.code}"></td>
+            </div>
         </tr>
         </tbody>
     </table>
     <br>
     <label>Number of Users in this room:</label>
-    <span th:text="${count}"></span>
+    <span th:text="${user.size}"></span>
+    <span>/10</span>
     <br>
-    <form action="/user/addUser" method="post">
+    <label title="Your Game Key will appear here when the room is full">Game Key:</label>
+    <div th:if="user.size == 10">
+        <span style="color:blue">alo</span>
+    </div>
+</div>
+<br><br>
+
+<div>
+    <form action="/user/addRoomOne" method="post">
         <label>User name:</label>
         <input type="text" name="name">
         <button type="submit">Enter Room</button>
     </form>
-    <label>Room Code:</label>
-    <span th:text="${roomCode}"></span>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${user}">
+            <div th:if="${user.room == 2}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.code}"></td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <label>Number of Users in this room:</label>
+    <span th:text="${countOne}"></span>
+    <span>/10</span>
+    <br>
+    <label title="Your Game Key will appear here when the room is full">Game Key:</label>
+    <span th:text="${gameKeyOne}" style="color:blue"></span>
 </div>
+<br><br>
+
+<div>
+    <form action="/user/addRoomOne" method="post">
+        <label>User name:</label>
+        <input type="text" name="name">
+        <button type="submit">Enter Room</button>
+    </form>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${user}">
+            <div th:if="${user.room == 3}">
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.code}"></td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <label>Number of Users in this room:</label>
+    <span th:text="${countOne}"></span>
+    <span>/10</span>
+    <br>
+    <label title="Your Game Key will appear here when the room is full">Game Key:</label>
+    <span th:text="${gameKeyTwo}" style="color:blue"></span>
+</div>
+<br><br>
+
+<!--<div>-->
+<!--    <form action="/user/addRoomOne" method="post">-->
+<!--        <label>User name:</label>-->
+<!--        <input type="text" name="name">-->
+<!--        <button type="submit">Enter Room</button>-->
+<!--    </form>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Code</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user: ${roomOne}">-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <td th:text="${user.code}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <br>-->
+<!--    <label>Number of Users in this room:</label>-->
+<!--    <span th:text="${countOne}"></span>-->
+<!--    <span>/10</span>-->
+<!--    <br>-->
+<!--    <label title="Your Game Key will appear here when the room is full">Game Key:</label>-->
+<!--    <span th:text="${gameKeyOne}" style="color:blue"></span>-->
+<!--</div>-->
+<!--<br><br>-->
+
+<!--<div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Code</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user: ${roomTwo}">-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <td th:text="${user.code}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <br>-->
+<!--    <label>Number of Users in this room:</label>-->
+<!--    <span th:text="${countTwo}"></span>-->
+<!--    <span>/8</span>-->
+<!--    <br>-->
+<!--    <form action="/user/addRoomTwo" method="post">-->
+<!--        <label>User name:</label>-->
+<!--        <input type="text" name="name">-->
+<!--        <button type="submit">Enter Room</button>-->
+<!--    </form>-->
+<!--    <label title="Your Room Code will appear here when the room is full">Room Code:</label>-->
+<!--    <span th:text="${gameKeyTwo}" style="color:blue"></span>-->
+<!--</div>-->
+<!--<br><br>-->
+
+<!--<div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Code</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user: ${roomThree}">-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <td th:text="${user.code}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <br>-->
+<!--    <label>Number of Users in this room:</label>-->
+<!--    <span th:text="${countThree}"></span>-->
+<!--    <span>/6</span>-->
+<!--    <br>-->
+<!--    <form action="/user/addRoomThree" method="post">-->
+<!--        <label>User name:</label>-->
+<!--        <input type="text" name="name">-->
+<!--        <button type="submit">Enter Room</button>-->
+<!--    </form>-->
+<!--    <label title="Your Room Code will appear here when the room is full">Room Code:</label>-->
+<!--    <span th:text="${gameKeyThree}" style="color:blue"></span>-->
+<!--</div>-->
+<!--<br><br>-->
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset='utf-8'>-->
+<!--    <meta http-equiv='X-UA-Compatible' content='IE=edge'>-->
+<!--    <title>Meet'N'Play</title>-->
+<!--    <meta name='viewport' content='width=device-width, initial-scale=1'>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:each="i, room : ${room}">-->
+<!--    <div>-->
+<!--        <table border="1">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Name</th>-->
+<!--                <th>Code</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="user: ${user} + \i\}">-->
+<!--                <td th:text="${user.name}"></td>-->
+<!--                <td th:text="${user.code}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--        <br>-->
+<!--        <label>Number of Users in this room:</label>-->
+<!--        <span th:text="${count}">/10</span>-->
+<!--        <br>-->
+<!--        <form action="/user/addUser" method="post">-->
+<!--            <label>User name:</label>-->
+<!--            <input type="text" name="name">-->
+<!--            <button type="submit">Enter Room</button>-->
+<!--        </form>-->
+<!--        <label>Room Code:</label>-->
+<!--        <span th:text="${roomCode}"></span>-->
+<!--    </div>-->
+<!--</div>-->
+
 </body>
 </html>
