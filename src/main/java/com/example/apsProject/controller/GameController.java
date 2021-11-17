@@ -33,9 +33,10 @@ public class GameController {
     }
 
     @PostMapping("/user/addUser")
-    public String addRoom(@RequestParam(name = "name") String name, @RequestParam(name = "room") String room) {
-        User user = new User(name, Integer.parseInt(room));
-        userRepository.save(user);
+    public String addUser(@RequestParam(name = "name") String name, @RequestParam(name = "room") String room) throws IOException {
+        int i = Integer.parseInt(room);
+        User user = new User(name, i);
+        userControlador.addUser(user, i);
         return "redirect:/user";
     }
 }

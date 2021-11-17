@@ -12,7 +12,7 @@ public class User {
     @Id
     private int code;
     private int room;
-    
+
     @Transient
     Random random = new Random();
 
@@ -21,7 +21,7 @@ public class User {
 
     public User(String name, int room) {
         this.name = name;
-        this.code = random.nextInt(100);
+        this.code = random.nextInt(1000);
         this.room = room;
     }
 

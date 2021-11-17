@@ -22,17 +22,36 @@ public class RoomControlador {
     RoomRepository roomRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     UserControlador userControlador;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public List<Room> getRooms() {
+    public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
         rooms = (List<Room>) roomRepository.findAll();
         for (Room room : rooms) {
             room.setUsers(userControlador.getUserByRoom(room.getId()));
+            room.setKey(getKey(room.getId()));
         }
         return rooms;
+    }
+
+    public String getKey(int i) throws IOException {
+        if (isRoomFull(i)) {
+            return gameAutentication();
+        }
+        return null;
+    }
+
+    private boolean isRoomFull(int i) {
+        Room room = roomRepository.findById(i);
+        if (room != null) {
+            return room.getMaxroom() == userRepository.findByRoom(i).size();
+        }
+        return false;
     }
 
     public static String gameAutentication() throws IOException {

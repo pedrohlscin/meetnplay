@@ -28,22 +28,15 @@ public class UserControlador {
         return users;
     }
 
-    public String getKey(int i) throws IOException {
-        if (isRoomFull(i)) {
-            return roomControlador.gameAutentication();
-        }
-        return null;
-    }
-
-    private boolean isRoomFull(int i) {
-        Room room = roomRepository.findById(i);
-        if (room != null) {
-            return room.getMaxroom() == userRepository.findByRoom(i).size();
-        }
-        return false;
-    }
-
     public List<User> getUserByRoom(int i) {
         return userRepository.findByRoom(i);
+    }
+
+    public void addUser(User user, int i) throws IOException {
+        if (!(getUserByRoom(i).size() == roomRepository.findById(i).getMaxroom())) {
+            userRepository.save(user);
+        } else {
+            System.out.println("sala ja se encontra cheia");
+        }
     }
 }

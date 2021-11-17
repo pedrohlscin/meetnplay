@@ -14,6 +14,9 @@ public class Room {
     @Transient
     private List<User> users;
 
+    @Transient
+    private String key;
+
     public int getId() {
         return id;
     }
@@ -36,5 +39,13 @@ public class Room {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
