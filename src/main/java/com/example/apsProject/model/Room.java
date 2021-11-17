@@ -1,20 +1,40 @@
 package com.example.apsProject.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
+import java.util.List;
+
+@Entity(name = "ROOM")
 public class Room {
-    String code;
+    @Id
+    private int id;
+    private int maxroom;
 
-    public Room() {
+    @Transient
+    private List<User> users;
+
+    public int getId() {
+        return id;
     }
 
-    public Room(String code) {
-        this.code = code;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public int getMaxroom() {
+        return maxroom;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setMaxroom(int maxroom) {
+        this.maxroom = maxroom;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

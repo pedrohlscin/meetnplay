@@ -12,7 +12,7 @@ public class User {
     @Id
     private int code;
     private int room;
-
+    
     @Transient
     Random random = new Random();
 
