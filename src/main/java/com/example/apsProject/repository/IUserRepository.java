@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface IUserRepository extends CrudRepository<User, Long> {
     @Query("select u.room from NORMAL_USER u")
     List<String> getRoom();
 

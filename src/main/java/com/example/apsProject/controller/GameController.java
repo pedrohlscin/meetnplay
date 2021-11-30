@@ -3,7 +3,7 @@ package com.example.apsProject.controller;
 import com.example.apsProject.controlador.RoomControlador;
 import com.example.apsProject.controlador.UserControlador;
 import com.example.apsProject.model.User;
-import com.example.apsProject.repository.UserRepository;
+import com.example.apsProject.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class GameController {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Autowired
     RoomControlador roomControlador;

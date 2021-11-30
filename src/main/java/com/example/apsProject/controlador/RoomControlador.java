@@ -1,16 +1,15 @@
 package com.example.apsProject.controlador;
 
+import com.example.apsProject.cadastro.RoomCadastro;
 import com.example.apsProject.model.GameKey;
 import com.example.apsProject.model.Room;
-import com.example.apsProject.repository.RoomRepository;
-import com.example.apsProject.repository.UserRepository;
+import com.example.apsProject.repository.IUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.net.ConnectException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +18,20 @@ import java.util.List;
 public class RoomControlador {
 
     @Autowired
-    RoomRepository roomRepository;
+    RoomCadastro roomCadastro;
 
     @Autowired
-    UserRepository userRepository;
+    IUserRepository userRepository;
 
     @Autowired
     UserControlador userControlador;
+
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
-        rooms = (List<Room>) roomRepository.findAll();
+        rooms = (List<Room>) roomCadastro.findAll();
         for (Room room : rooms) {
             room.setUsers(userControlador.getUserByRoom(room.getId()));
             room.setKey(getKey(room.getId()));
@@ -47,7 +47,7 @@ public class RoomControlador {
     }
 
     private boolean isRoomFull(int i) {
-        Room room = roomRepository.findById(i);
+        Room room = roomCadastro.findById(i);
         if (room != null) {
             return room.getMaxroom() == userRepository.findByRoom(i).size();
         }
@@ -59,13 +59,13 @@ public class RoomControlador {
             GameKey gameKey = mapper.readValue(new URL("http://localhost:5000"), GameKey.class);
             System.out.println("" + gameKey.getKey());
             return gameKey.getKey();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return "";
+        } catch (ConnectException e) {
+            String error = "Comunicacao com a API de jogo falhou";
+            return error;
         }
     }
 
     public void addRoom(Room r){
-        roomRepository.save(r);
+        roomCadastro.save(r);
     }
 }

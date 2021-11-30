@@ -19,7 +19,7 @@ public class RoomController {
     @Autowired
     RoomControlador roomControlador;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String getRoom(Model model) throws IOException {
         model.addAttribute("rooms", roomControlador.getRooms());
         return "room";

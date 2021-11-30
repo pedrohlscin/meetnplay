@@ -1,9 +1,9 @@
 package com.example.apsProject.controlador;
 
-import com.example.apsProject.model.Room;
+import com.example.apsProject.cadastro.UserCadastro;
 import com.example.apsProject.model.User;
-import com.example.apsProject.repository.RoomRepository;
-import com.example.apsProject.repository.UserRepository;
+import com.example.apsProject.repository.IRoomRepository;
+import com.example.apsProject.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,26 +15,26 @@ import java.util.List;
 public class UserControlador {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserCadastro userCadastro;
 
     @Autowired
-    private RoomRepository roomRepository;
+    private IRoomRepository roomRepository;
 
     RoomControlador roomControlador = new RoomControlador();
 
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add);
+        userCadastro.findAll().forEach(users::add);
         return users;
     }
 
     public List<User> getUserByRoom(int i) {
-        return userRepository.findByRoom(i);
+        return userCadastro.findByRoom(i);
     }
 
     public void addUser(User user, int i) throws IOException {
         if (!(getUserByRoom(i).size() == roomRepository.findById(i).getMaxroom())) {
-            userRepository.save(user);
+            userCadastro.save(user);
         } else {
             System.out.println("sala ja se encontra cheia");
         }
