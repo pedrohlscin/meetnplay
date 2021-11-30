@@ -64,4 +64,8 @@ public class RoomControlador {
             return "";
         }
     }
+
+    public void addRoom(Room r){
+        roomRepository.save(r);
+    }
 }

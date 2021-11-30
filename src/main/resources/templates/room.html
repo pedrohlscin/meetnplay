@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Room</th>
+            <th>Tamanho da room</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room: ${rooms}">
+            <td th:text="${room.id}">Id:></td>
+            <td th:text="${room.maxroom}">Tamanho da room:></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="/room/inserir/" method="post">
+        <label>Tamanho da room</label>
+        <input type="number" name="tamanhoRoom" />
+        <button type="submit">Criar</button>
+    </form>
+</div>
+</body>
+</html>
