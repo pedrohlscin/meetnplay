@@ -1,5 +1,6 @@
 package com.example.apsProject.controller;
 
+import com.example.apsProject.Fachada;
 import com.example.apsProject.controlador.RoomControlador;
 import com.example.apsProject.controlador.UserControlador;
 import com.example.apsProject.model.User;
@@ -15,20 +16,14 @@ import java.io.IOException;
 
 
 @Controller
-public class GameController {
+public class UserController {
 
     @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
-    RoomControlador roomControlador;
-
-    @Autowired
-    UserControlador userControlador;
+    private Fachada fachada;
 
     @GetMapping("/user")
     public String getUsers(Model model) throws IOException {
-        model.addAttribute("rooms", roomControlador.getRooms());
+        model.addAttribute("rooms", fachada.getRooms());
         return "user";
     }
 
@@ -36,7 +31,7 @@ public class GameController {
     public String addUser(@RequestParam(name = "name") String name, @RequestParam(name = "room") String room) throws IOException {
         int i = Integer.parseInt(room);
         User user = new User(name, i);
-        userControlador.addUser(user, i);
+        fachada.addUser(user, i);
         return "redirect:/user";
     }
 }

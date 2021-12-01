@@ -1,11 +1,14 @@
 package com.example.apsProject.cadastro;
 
+import com.example.apsProject.model.Room;
 import com.example.apsProject.model.User;
 import com.example.apsProject.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class UserCadastro {
 
     @Autowired

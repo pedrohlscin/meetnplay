@@ -1,6 +1,7 @@
 package com.example.apsProject.controlador;
 
 import com.example.apsProject.cadastro.RoomCadastro;
+import com.example.apsProject.cadastro.UserCadastro;
 import com.example.apsProject.model.GameKey;
 import com.example.apsProject.model.Room;
 import com.example.apsProject.repository.IUserRepository;
@@ -21,11 +22,7 @@ public class RoomControlador {
     RoomCadastro roomCadastro;
 
     @Autowired
-    IUserRepository userRepository;
-
-    @Autowired
-    UserControlador userControlador;
-
+    UserCadastro userCadastro;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -33,7 +30,7 @@ public class RoomControlador {
         List<Room> rooms = new ArrayList<>();
         rooms = (List<Room>) roomCadastro.findAll();
         for (Room room : rooms) {
-            room.setUsers(userControlador.getUserByRoom(room.getId()));
+            room.setUsers(userCadastro.findByRoom(room.getId()));
             room.setKey(getKey(room.getId()));
         }
         return rooms;
@@ -49,7 +46,7 @@ public class RoomControlador {
     private boolean isRoomFull(int i) {
         Room room = roomCadastro.findById(i);
         if (room != null) {
-            return room.getMaxroom() == userRepository.findByRoom(i).size();
+            return room.getMaxroom() == userCadastro.findByRoom(i).size();
         }
         return false;
     }

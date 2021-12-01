@@ -1,5 +1,6 @@
 package com.example.apsProject.controlador;
 
+import com.example.apsProject.cadastro.RoomCadastro;
 import com.example.apsProject.cadastro.UserCadastro;
 import com.example.apsProject.model.User;
 import com.example.apsProject.repository.IRoomRepository;
@@ -18,7 +19,7 @@ public class UserControlador {
     private UserCadastro userCadastro;
 
     @Autowired
-    private IRoomRepository roomRepository;
+    private RoomCadastro roomCadastro;
 
     RoomControlador roomControlador = new RoomControlador();
 
@@ -28,12 +29,12 @@ public class UserControlador {
         return users;
     }
 
-    public List<User> getUserByRoom(int i) {
+    public List<User> findByRoom(int i) {
         return userCadastro.findByRoom(i);
     }
 
-    public void addUser(User user, int i) throws IOException {
-        if (!(getUserByRoom(i).size() == roomRepository.findById(i).getMaxroom())) {
+    public void addUser(User user, int i) {
+        if (!(findByRoom(i).size() == roomCadastro.findById(i).getMaxroom())) {
             userCadastro.save(user);
         } else {
             System.out.println("sala ja se encontra cheia");

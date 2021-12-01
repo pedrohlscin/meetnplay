@@ -1,5 +1,6 @@
 package com.example.apsProject.controller;
 
+import com.example.apsProject.Fachada;
 import com.example.apsProject.controlador.RoomControlador;
 import com.example.apsProject.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ import java.io.IOException;
 public class RoomController {
 
     @Autowired
-    RoomControlador roomControlador;
+    private Fachada fachada;
 
     @GetMapping("")
     public String getRoom(Model model) throws IOException {
-        model.addAttribute("rooms", roomControlador.getRooms());
+        model.addAttribute("rooms", fachada.getRooms());
         return "room";
     }
 
@@ -30,7 +31,7 @@ public class RoomController {
         int i = Integer.parseInt(tamanhoRoom);
         Room r = new Room();
         r.setMaxroom(i);
-        roomControlador.addRoom(r);
-        return "redirect:/room/";
+        fachada.addRoom(r);
+        return "redirect:/room";
     }
 }

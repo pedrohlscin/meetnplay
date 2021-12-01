@@ -5,8 +5,15 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Meet'N'Play</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+<!--    <meta http-equiv="refresh" content="60">-->
 </head>
 <body>
+<div>
+<a href="http://localhost:8080/room">
+    <button type="submit" style="font-size: 20px;">Create Room</button>
+</a>
+</div>
+<br>
 <div th:each="room: ${rooms}">
     <div style="border-style: solid; border-color: black; padding:10px">
         <form action="/user/addUser" method="post">
