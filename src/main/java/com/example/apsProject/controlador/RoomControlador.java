@@ -31,7 +31,10 @@ public class RoomControlador {
         rooms = (List<Room>) roomCadastro.findAll();
         for (Room room : rooms) {
             room.setUsers(userCadastro.findByRoom(room.getId()));
-            room.setKey(getKey(room.getId()));
+            if(room.getGamekey() == null || room.getGamekey().contains("Comunicacao")){
+                room.setGamekey(getKey(room.getId()));
+                roomCadastro.save(room);
+            }
         }
         return rooms;
     }
