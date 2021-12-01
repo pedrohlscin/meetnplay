@@ -4,14 +4,14 @@ import com.example.apsProject.cadastro.RoomCadastro;
 import com.example.apsProject.cadastro.UserCadastro;
 import com.example.apsProject.model.GameKey;
 import com.example.apsProject.model.Room;
-import com.example.apsProject.repository.IUserRepository;
+import com.example.apsProject.roomState.Context;
+import com.example.apsProject.roomState.FullState;
+import com.example.apsProject.roomState.StartState;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.net.ConnectException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +25,10 @@ public class RoomControlador {
     UserCadastro userCadastro;
 
     private static final ObjectMapper mapper = new ObjectMapper();
+
+    Context context = new Context();
+    StartState startState = new StartState();
+    FullState fullState = new FullState();
 
     public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
@@ -41,9 +45,9 @@ public class RoomControlador {
 
     public String getKey(int i) throws IOException {
         if (isRoomFull(i)) {
-            return gameAutentication();
+            return fullState.doAction(context);
         }
-        return null;
+        return startState.doAction(context);
     }
 
     private boolean isRoomFull(int i) {
@@ -52,17 +56,6 @@ public class RoomControlador {
             return room.getMaxroom() == userCadastro.findByRoom(i).size();
         }
         return false;
-    }
-
-    public static String gameAutentication() throws IOException {
-        try {
-            GameKey gameKey = mapper.readValue(new URL("http://localhost:5000"), GameKey.class);
-            System.out.println("" + gameKey.getKey());
-            return gameKey.getKey();
-        } catch (ConnectException e) {
-            String error = "Comunicacao com a API de jogo falhou";
-            return error;
-        }
     }
 
     public void addRoom(Room r){

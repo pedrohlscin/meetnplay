@@ -14,9 +14,6 @@ public class Room {
     @Transient
     private List<User> users;
 
-//    @Transient
-//    private String key;
-
     public int getId() {
         return id;
     }
