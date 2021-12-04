@@ -1,5 +1,8 @@
 package com.example.apsProject.roomState;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Context {
     private State state;
 

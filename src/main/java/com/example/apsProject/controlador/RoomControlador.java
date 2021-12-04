@@ -7,6 +7,7 @@ import com.example.apsProject.model.Room;
 import com.example.apsProject.roomState.Context;
 import com.example.apsProject.roomState.FullState;
 import com.example.apsProject.roomState.StartState;
+import com.example.apsProject.roomState.State;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +25,12 @@ public class RoomControlador {
     @Autowired
     UserCadastro userCadastro;
 
-    private static final ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    Context context;
 
-    Context context = new Context();
-    StartState startState = new StartState();
-    FullState fullState = new FullState();
+    State state = new StartState();
+
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
@@ -45,9 +47,10 @@ public class RoomControlador {
 
     public String getKey(int i) throws IOException {
         if (isRoomFull(i)) {
-            return fullState.doAction(context);
+            state = new FullState();
+            return state.doAction(context);
         }
-        return startState.doAction(context);
+        return state.doAction(context);
     }
 
     private boolean isRoomFull(int i) {
