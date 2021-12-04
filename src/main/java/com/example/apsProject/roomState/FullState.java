@@ -11,7 +11,11 @@ import java.net.URL;
 
 public class FullState implements State{
 
-    public String doAction(Context context) throws IOException{
+    public void doAction(Context context){
+        context.setState(this);
+    }
+
+    public String getKey() throws IOException{
         ObjectMapper mapper = new ObjectMapper();
         try {
             GameKey gameKey = mapper.readValue(new URL("http://localhost:5000"), GameKey.class);

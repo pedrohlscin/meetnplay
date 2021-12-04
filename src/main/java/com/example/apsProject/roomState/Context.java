@@ -7,7 +7,7 @@ public class Context {
     private State state;
 
     public Context(){
-        this.state = null;
+        this.state = new StartState();
     }
 
     public State getState() {

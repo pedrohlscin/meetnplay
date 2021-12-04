@@ -28,8 +28,6 @@ public class RoomControlador {
     @Autowired
     Context context;
 
-    State state = new StartState();
-
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public List<Room> getRooms() throws IOException {
@@ -38,6 +36,7 @@ public class RoomControlador {
         for (Room room : rooms) {
             room.setUsers(userCadastro.findByRoom(room.getId()));
             if(room.getGamekey() == null || room.getGamekey().contains("Comunicacao")){
+                context.setState(new StartState());
                 room.setGamekey(getKey(room.getId()));
                 roomCadastro.save(room);
             }
@@ -47,10 +46,11 @@ public class RoomControlador {
 
     public String getKey(int i) throws IOException {
         if (isRoomFull(i)) {
-            state = new FullState();
-            return state.doAction(context);
+            context.setState(new FullState());
+            String key = context.getState().getKey();
+            return key;
         }
-        return state.doAction(context);
+        return context.getState().getKey();
     }
 
     private boolean isRoomFull(int i) {

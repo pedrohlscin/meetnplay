@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 
 
 public class StartState implements State{
-    public String doAction(Context context){
+    public void doAction(Context context){
+        context.setState(this);
+    }
+
+    public String getKey(){
         return null;
     }
 }
