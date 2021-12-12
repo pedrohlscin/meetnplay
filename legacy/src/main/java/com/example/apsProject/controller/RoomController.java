@@ -19,9 +19,9 @@ public class RoomController {
     @Autowired
     RoomControlador roomControlador;
 
-    @GetMapping("/")
-    public String getRoom(Model model) throws IOException {
-        model.addAttribute("rooms", roomControlador.getRooms());
+    @GetMapping("")
+    public String getRoom(Model model) {
+        model.addAttribute("rooms", roomControlador.getAllRooms());
         return "room";
     }
 
@@ -31,6 +31,17 @@ public class RoomController {
         Room r = new Room();
         r.setMaxroom(i);
         roomControlador.addRoom(r);
-        return "redirect:/room/";
+        return "redirect:/room";
+    }
+
+    @PostMapping("remover")
+    public String remover(@RequestParam(name = "roomId") String roomId){
+        int i = Integer.parseInt(roomId);
+        try{
+            roomControlador.deleteRoom(i);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/room";
     }
 }

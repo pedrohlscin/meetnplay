@@ -29,6 +29,10 @@ public class RoomControlador {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
+    public List<Room> getAllRooms(){
+        return (List<Room>) roomRepository.findAll();
+    }
+
     public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
         rooms = (List<Room>) roomRepository.findAll();
@@ -67,5 +71,14 @@ public class RoomControlador {
 
     public void addRoom(Room r){
         roomRepository.save(r);
+    }
+
+    public void deleteRoom(int i) throws Exception {
+        Room r = roomRepository.findById(i);
+        if(r != null){
+            roomRepository.delete(r);
+        }else{
+            throw new Exception("Room not found!");
+        }
     }
 }
