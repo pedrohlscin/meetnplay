@@ -12,4 +12,6 @@ public interface IAccountRepository {
     Account get(Long id);
 
     void update(Account account);
+
+    Long getByName(String name);
 }

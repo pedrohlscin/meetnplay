@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Rooms</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+<!--<a th:href="@{${baseUrl}+'/room/form'}">Create room</a>-->
+<p>It worked!</p>
+<ul>
+    <li th:each="login: ${logins}">
+        <span th:text="${login}"></span>
+    </li>
+</ul>
+<!--<ul>-->
+<!--    <li th:each="room: ${rooms}">-->
+<!--        <span th:text="${room.capacity}"></span>-->
+<!--        <form action="/room/delete" method="post">-->
+<!--            <input type="hidden" name="roomId" th:value="${room.id}">-->
+<!--            <button type="submit">Delete</button>-->
+<!--        </form>-->
+<!--        &lt;!&ndash;            <button type="submit" onclick="/room/delete">Delete</button>&ndash;&gt;-->
+<!--    </li>-->
+<!--</ul>-->
+
+</div>
+</body>
+</html>

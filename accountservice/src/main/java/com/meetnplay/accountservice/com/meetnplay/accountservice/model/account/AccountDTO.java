@@ -5,9 +5,9 @@ import lombok.Value;
 @Value
 public class AccountDTO {
     private String name;
-    private Long balance;
+    private String password;
 
     public Account toEntity() {
-        return Account.builder().name(name).build();
+        return Account.builder().name(name).password(password).build();
     }
 }

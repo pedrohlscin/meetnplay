@@ -19,4 +19,8 @@ public class AccountController {
     public void delete(long id) {
         accountCollection.remove(id);
     }
+
+    public Long getAccountIdByName(String name){
+        return accountCollection.getAccountIdByName(name);
+    }
 }

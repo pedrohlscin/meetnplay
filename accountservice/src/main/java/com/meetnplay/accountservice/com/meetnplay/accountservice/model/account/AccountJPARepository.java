@@ -32,5 +32,10 @@ public class AccountJPARepository implements IAccountRepository {
     public void update(Account account) {
         accountDAO.save(account);
     }
+
+    @Override
+    public Long getByName(String name) {
+        return accountDAO.getAccountByName(name).getId();
+    }
 }
 

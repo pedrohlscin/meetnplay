@@ -23,4 +23,8 @@ public class AccountCollection {
     public Account get(Long id) {
         return repository.get(id);
     }
+
+    public Long getAccountIdByName(String name){
+        return repository.getByName(name);
+    }
 }
