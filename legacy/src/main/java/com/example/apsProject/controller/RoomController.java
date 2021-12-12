@@ -1,5 +1,6 @@
 package com.example.apsProject.controller;
 
+import com.example.apsProject.Fachada;
 import com.example.apsProject.controlador.RoomControlador;
 import com.example.apsProject.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,16 @@ import java.io.IOException;
 public class RoomController {
 
     @Autowired
-    RoomControlador roomControlador;
+    private Fachada fachada;
 
     @GetMapping("")
+<<<<<<< HEAD:legacy/src/main/java/com/example/apsProject/controller/RoomController.java
     public String getRoom(Model model) {
         model.addAttribute("rooms", roomControlador.getAllRooms());
+=======
+    public String getRoom(Model model) throws IOException {
+        model.addAttribute("rooms", fachada.getRooms());
+>>>>>>> 9160c4ec3a78b2c35abc805c12603a2130e17e4c:src/main/java/com/example/apsProject/controller/RoomController.java
         return "room";
     }
 
@@ -30,6 +36,7 @@ public class RoomController {
         int i = Integer.parseInt(tamanhoRoom);
         Room r = new Room();
         r.setMaxroom(i);
+<<<<<<< HEAD:legacy/src/main/java/com/example/apsProject/controller/RoomController.java
         roomControlador.addRoom(r);
         return "redirect:/room";
     }
@@ -42,6 +49,9 @@ public class RoomController {
         } catch (Exception e){
             e.printStackTrace();
         }
+=======
+        fachada.addRoom(r);
+>>>>>>> 9160c4ec3a78b2c35abc805c12603a2130e17e4c:src/main/java/com/example/apsProject/controller/RoomController.java
         return "redirect:/room";
     }
 }

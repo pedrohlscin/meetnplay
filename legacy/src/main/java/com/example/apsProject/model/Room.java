@@ -9,12 +9,10 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int maxroom;
+    private String gamekey;
 
     @Transient
     private List<User> users;
-
-    @Transient
-    private String key;
 
     public int getId() {
         return id;
@@ -40,11 +38,11 @@ public class Room {
         this.users = users;
     }
 
-    public String getKey() {
-        return key;
+    public String getGamekey() {
+        return gamekey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setGamekey(String gamekey) {
+        this.gamekey = gamekey;
     }
 }

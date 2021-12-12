@@ -1,17 +1,18 @@
 package com.example.apsProject.controlador;
 
+import com.example.apsProject.cadastro.RoomCadastro;
+import com.example.apsProject.cadastro.UserCadastro;
 import com.example.apsProject.model.GameKey;
 import com.example.apsProject.model.Room;
-import com.example.apsProject.repository.RoomRepository;
-import com.example.apsProject.repository.UserRepository;
+import com.example.apsProject.roomState.Context;
+import com.example.apsProject.roomState.FullState;
+import com.example.apsProject.roomState.StartState;
+import com.example.apsProject.roomState.State;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,13 @@ import java.util.List;
 public class RoomControlador {
 
     @Autowired
-    RoomRepository roomRepository;
+    RoomCadastro roomCadastro;
 
     @Autowired
-    UserRepository userRepository;
+    UserCadastro userCadastro;
 
     @Autowired
-    UserControlador userControlador;
+    Context context;
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -35,42 +36,37 @@ public class RoomControlador {
 
     public List<Room> getRooms() throws IOException {
         List<Room> rooms = new ArrayList<>();
-        rooms = (List<Room>) roomRepository.findAll();
+        rooms = (List<Room>) roomCadastro.findAll();
         for (Room room : rooms) {
-            room.setUsers(userControlador.getUserByRoom(room.getId()));
-            room.setKey(getKey(room.getId()));
+            room.setUsers(userCadastro.findByRoom(room.getId()));
+            if(room.getGamekey() == null || room.getGamekey().contains("Comunicacao")){
+                context.setState(new StartState());
+                room.setGamekey(getKey(room.getId()));
+                roomCadastro.save(room);
+            }
         }
         return rooms;
     }
 
     public String getKey(int i) throws IOException {
         if (isRoomFull(i)) {
-            return gameAutentication();
+            context.setState(new FullState());
+            String key = context.getState().getKey();
+            return key;
         }
-        return null;
+        return context.getState().getKey();
     }
 
     private boolean isRoomFull(int i) {
-        Room room = roomRepository.findById(i);
+        Room room = roomCadastro.findById(i);
         if (room != null) {
-            return room.getMaxroom() == userRepository.findByRoom(i).size();
+            return room.getMaxroom() == userCadastro.findByRoom(i).size();
         }
         return false;
     }
 
-    public static String gameAutentication() throws IOException {
-        try {
-            GameKey gameKey = mapper.readValue(new URL("http://localhost:5000"), GameKey.class);
-            System.out.println("" + gameKey.getKey());
-            return gameKey.getKey();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
-
     public void addRoom(Room r){
-        roomRepository.save(r);
+        roomCadastro.save(r);
     }
 
     public void deleteRoom(int i) throws Exception {

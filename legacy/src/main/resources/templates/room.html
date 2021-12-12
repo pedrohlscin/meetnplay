@@ -3,10 +3,16 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Create Rooms</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
+<div>
+<a href="http://localhost:8080/user">
+    <button type="submit" style="font-size: 20px;">Go To Rooms</button>
+</a>
+</div>
+<br>
 <div>
     <table border="1">
         <thead>
@@ -22,7 +28,7 @@
         </tr>
         </tbody>
     </table>
-
+    <br>
     <form action="/room/inserir/" method="post">
         <label>Tamanho da room</label>
         <input type="number" name="tamanhoRoom" />
