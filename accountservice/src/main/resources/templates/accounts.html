@@ -11,7 +11,14 @@
 <body>
     <a th:href="@{${baseUrl}+'/account/form'}">Create new Account</a>
     <ul>
-        <li th:each="account: ${accounts}"><span th:text="${account}"></span></li>
+        <li th:each="account: ${accounts}">
+            <span th:text="${account}"></span>
+            <form action="/account/delete" method="post">
+                <input type="hidden" name="accountId" th:value="${account.id}">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+
     </ul>
 </body>
 

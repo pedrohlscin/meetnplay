@@ -16,4 +16,7 @@ public class AccountController {
         return accountCollection.getAll();
     }
 
+    public void delete(long id) {
+        accountCollection.remove(id);
+    }
 }
