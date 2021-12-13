@@ -7,14 +7,30 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-    <a th:href="@{${baseUrl}+'/room/form'}">Create room</a>
+<!--    <a th:href="@{${baseUrl}+'/room/form'}">Create room</a>-->
+    <div style="border-style: solid; border-color: black; padding:10px; width: fit-content">
+        <div style="text-align:center;">
+            <strong>Criar Nova Sala</strong>
+        </div>
+        <br>
+        <form action="/room/form" method="post">
+            <label for="capacity">Capacidade:</label>
+            <input name="capacity" type="number" />
+            <button type="submit">Create</button>
+        </form>
+    </div>
     <ul>
         <li th:each="room: ${rooms}">
+            <label>Sala</label>
+            <span th:text="${room.id}"></span>
+            <br>
+            <label>Capacidade:</label>
             <span th:text="${room.capacity}"></span>
             <form action="/room/delete" method="post">
                 <input type="hidden" name="roomId" th:value="${room.id}">
                 <button type="submit">Delete</button>
             </form>
+            <br>
 <!--            <button type="submit" onclick="/room/delete">Delete</button>-->
         </li>
     </ul>
